@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="description" content="A fun counting game for kids">
+    <title>Counting Fun for Kids!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Confetti Canvas Overlay -->
+    <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+    <!-- Game Selection Screen -->
+    <section id="gameSelectScreen" class="screen active" aria-label="Game selection screen">
+        <div class="container">
+            <div class="screen-header">
+                <button id="homeButtonGameSelect" class="btn btn-secondary btn-small" aria-label="Return to home screen">🏠 Home</button>
+            </div>
+            <h1 class="title">🎮 Choose Your Game! 🎮</h1>
+            
+            <div class="game-selection-grid">
+                <button id="countingGameBtn" class="game-card" aria-label="Play counting game">
+                    <div class="game-card-icon">🔢</div>
+                    <div class="game-card-title">Counting Game</div>
+                    <div class="game-card-desc">Count the pictures and find the right number!</div>
+                </button>
+                
+                <button id="additionGameBtn" class="game-card" aria-label="Play addition game">
+                    <div class="game-card-icon">➕</div>
+                    <div class="game-card-title">Addition Game</div>
+                    <div class="game-card-desc">Add two groups together!</div>
+                </button>
+                
+                <button id="subtractionGameBtn" class="game-card" aria-label="Play subtraction game">
+                    <div class="game-card-icon">➖</div>
+                    <div class="game-card-title">Subtraction Game</div>
+                    <div class="game-card-desc">Take away and find the difference!</div>
+                </button>
+                
+                <button id="multiplicationGameBtn" class="game-card" aria-label="Play multiplication game">
+                    <div class="game-card-icon">✖️</div>
+                    <div class="game-card-title">Multiplication Game</div>
+                    <div class="game-card-desc">Multiply groups together!</div>
+                </button>
+                
+                <button id="divisionGameBtn" class="game-card" aria-label="Play division game">
+                    <div class="game-card-icon">➗</div>
+                    <div class="game-card-title">Division Game</div>
+                    <div class="game-card-desc">Divide into equal groups!</div>
+                </button>
+                
+                <button id="comparisonGameBtn" class="game-card" aria-label="Play comparison game">
+                    <div class="game-card-icon">⚖️</div>
+                    <div class="game-card-title">Comparison Game</div>
+                    <div class="game-card-desc">Compare two numbers!</div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Home Screen -->
+    <section id="homeScreen" class="screen" aria-label="Home screen">
+        <div class="container">
+            <h1 class="title">🎯 Counting Fun! 🎯</h1>
+            
+            <div class="settings-card">
+                <h2 class="settings-title">Settings</h2>
+                
+                <div class="setting-group">
+                    <label for="levelSelect" class="setting-label">Difficulty Level</label>
+                    <select id="levelSelect" class="setting-select" aria-label="Select difficulty level">
+                        <option value="10">Easy (1-10)</option>
+                        <option value="20">Medium (1-20)</option>
+                        <option value="50">Hard (1-50)</option>
+                    </select>
+                </div>
+
+                <div class="setting-group">
+                    <label for="themeSelect" class="setting-label">Theme</label>
+                    <select id="themeSelect" class="setting-select" aria-label="Select emoji theme">
+                        <option value="Fruits">🍎 Fruits</option>
+                        <option value="Animals">🐶 Animals</option>
+                        <option value="Stars">⭐ Stars</option>
+                        <option value="Cars">🚗 Cars</option>
+                        <option value="Hearts">❤️ Hearts</option>
+                        <option value="Sports">⚽ Sports</option>
+                    </select>
+                </div>
+
+                <div class="setting-group toggle-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="soundToggle" class="toggle-checkbox" aria-label="Toggle sound effects">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-text">🔊 Sound</span>
+                    </label>
+                </div>
+
+                <div class="setting-group toggle-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="voiceToggle" class="toggle-checkbox" aria-label="Toggle voice narration">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-text">🎤 Voice</span>
+                    </label>
+                </div>
+            </div>
+
+            <button id="startButton" class="btn btn-primary btn-large" aria-label="Start the counting game">
+                Start Game! 🚀
+            </button>
+        </div>
+    </section>
+
+    <!-- Game Screen -->
+    <section id="gameScreen" class="screen" aria-label="Game screen">
+        <div class="container">
+            <div class="game-header">
+                <button id="homeButton" class="btn btn-secondary btn-small" aria-label="Return to home screen">🏠 Home</button>
+                <div class="progress-info">
+                    <span id="progressText" class="progress-text">Question 1 of 10</span>
+                    <div class="score-displays">
+                        <span id="starsDisplay" class="stars-display">⭐ 0</span>
+                        <span id="balloonsDisplay" class="balloons-display">🎈 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-content">
+                <div id="gameTitle" class="game-title"></div>
+                
+                <button id="showPicturesButton" class="btn btn-primary btn-large" aria-label="Show pictures">
+                    Show Pictures
+                </button>
+
+                <div id="picturesContainer" class="pictures-container" aria-label="Pictures" role="img" aria-live="polite"></div>
+                
+                <div id="additionGroups" class="addition-groups" aria-label="Addition groups" aria-live="polite"></div>
+                
+                <div id="comparisonNumbers" class="comparison-numbers" aria-label="Number comparison" aria-live="polite"></div>
+
+                <div id="hintText" class="hint-text" aria-live="polite"></div>
+
+                <div id="choicesContainer" class="choices-container" aria-label="Answer choices"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- End Screen -->
+    <section id="endScreen" class="screen" aria-label="End screen">
+        <div class="container">
+            <div class="screen-header">
+                <button id="homeButtonEnd" class="btn btn-secondary btn-small" aria-label="Return to home screen">🏠 Home</button>
+            </div>
+            <h1 class="title">🎉 Great Job! 🎉</h1>
+            
+            <div class="results-card">
+                <div class="result-item">
+                    <span class="result-label">Your Score:</span>
+                    <span id="finalScore" class="result-value">0</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Stars Earned:</span>
+                    <span id="finalStars" class="result-value">⭐ 0</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Balloons Popped:</span>
+                    <span id="finalBalloons" class="result-value">🎈 0</span>
+                </div>
+                <div class="result-item" id="streakItem" style="display: none;">
+                    <span class="result-label">🔥 Streak:</span>
+                    <span id="finalStreak" class="result-value">0 days</span>
+                </div>
+            </div>
+
+            <button id="playAgainButton" class="btn btn-primary btn-large" aria-label="Play again">
+                Play Again! 🎮
+            </button>
+            
+            <button id="backToGamesButton" class="btn btn-secondary btn-large" aria-label="Back to game selection">
+                Choose Another Game 🎯
+            </button>
+        </div>
+    </section>
+
+    <!-- Success Overlay -->
+    <div id="successOverlay" class="success-overlay" aria-hidden="true" role="alert" aria-live="assertive">
+        <div class="success-content">
+            <div class="success-emoji">🎉</div>
+            <div class="success-text">Congratulations you did it!</div>
+        </div>
+    </div>
+
+    <!-- Avatar Overlay (for 3 consecutive stars) -->
+    <div id="avatarOverlay" class="avatar-overlay" aria-hidden="true" role="alert" aria-live="assertive">
+        <div class="avatar-content">
+            <div class="dinosaur-container">
+                <div class="dinosaur-body">🦕</div>
+                <div class="dinosaur-mouth talking"></div>
+            </div>
+            <div class="avatar-text">You are on fire great job!</div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
