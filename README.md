@@ -1,16 +1,19 @@
-# Counting Fun for Kids! 🎯
+# Math App for Kids! 🎯
 
-A complete, kid-friendly counting webapp built with pure HTML, CSS, and JavaScript. No frameworks or external dependencies required!
+A complete, kid-friendly math learning webapp built with pure HTML, CSS, and JavaScript. No frameworks or external dependencies required!
 
 ## Features
 
+- **Multiple Math Games**: Counting, Addition, Subtraction, Multiplication, Division, and Number Comparison
 - **Three Difficulty Levels**: Easy (1-10), Medium (1-20), Hard (1-50)
 - **Six Emoji Themes**: Fruits 🍎, Animals 🐶, Stars ⭐, Cars 🚗, Hearts ❤️, Sports ⚽
 - **10 Questions Per Session**: Progressive learning with visual feedback
-- **Sound Effects**: Optional WebAudio-based success sounds
+- **Sound Effects**: Optional WebAudio-based success sounds and balloon pop sounds
 - **Voice Narration**: Optional SpeechSynthesis for encouragement
-- **Confetti Animation**: Canvas-based celebration on correct answers
-- **Progress Tracking**: Shows current question and stars earned
+- **Confetti & Balloons**: Interactive canvas-based celebration on correct answers
+- **Progress Tracking**: Shows current question, stars earned, and balloons popped
+- **Streak System**: Track daily progress with 3-day and 10-day streak milestones
+- **Talking Dinosaur Avatar**: Appears every 3 consecutive correct answers
 - **Settings Persistence**: Saves preferences to localStorage
 - **Fully Responsive**: Works great on desktop, tablet, and mobile devices
 - **Accessibility**: ARIA labels, keyboard navigation, and high contrast support
@@ -48,12 +51,23 @@ Then open `http://localhost:8000` in your browser.
 
 ## Game Flow
 
-1. **Home Screen**: Choose difficulty level, theme, and toggle sound/voice settings
-2. **Game Screen**: 
-   - Click "Show Pictures" to reveal emojis to count
-   - Select the correct number from three multiple-choice options
+1. **Game Selection Screen**: Choose from 6 different math games
+2. **Home Screen**: Choose difficulty level, theme, and toggle sound/voice settings
+3. **Game Screen**: 
+   - Answer math questions with visual emoji aids
+   - Select the correct answer from multiple-choice options
    - Get instant feedback with animations and sounds
-3. **End Screen**: View your score and stars, then play again!
+   - Pop balloons for extra fun!
+4. **End Screen**: View your score, stars, balloons popped, and streak, then play again!
+
+## Games Available
+
+- **Counting**: Count the number of emojis displayed
+- **Addition**: Add two groups of emojis together
+- **Subtraction**: Subtract one group from another
+- **Multiplication**: Multiply groups of emojis
+- **Division**: Divide emojis into equal groups
+- **Comparison**: Compare two numbers using >, <, or =
 
 ## Customization
 
@@ -65,8 +79,8 @@ To add a new emoji theme, edit `app.js`:
 ```javascript
 const themeEmojis = {
     // ... existing themes
-    'Dinosaurs': '🦕',
-    'Space': '🚀'
+    'Dinosaurs': ['🦕', '🦖', '🦎'],
+    'Space': ['🚀', '🛸', '⭐']
 };
 ```
 
@@ -90,7 +104,7 @@ session: {
 
 ### Modifying Sound Effects
 
-Edit the `playSuccessSound()` and `playWrongSound()` functions in `app.js` to customize frequencies, durations, and patterns.
+Edit the `playSuccessSound()`, `playWrongSound()`, and `playPopSound()` functions in `app.js` to customize frequencies, durations, and patterns.
 
 ## Browser Compatibility
 
@@ -117,10 +131,10 @@ counting-kids-webapp/
 ## Technical Details
 
 - **No Dependencies**: Pure vanilla JavaScript, no npm packages or CDNs
-- **Confetti**: Custom canvas-based particle system
+- **Confetti & Balloons**: Custom canvas-based particle system with interactive balloon popping
 - **Audio**: WebAudio API for cross-platform sound generation
 - **Voice**: SpeechSynthesis API for text-to-speech
-- **Storage**: localStorage for settings persistence
+- **Storage**: localStorage for settings and streak persistence
 - **Responsive**: Mobile-first CSS with flexible layouts
 - **Accessibility**: WCAG-compliant with ARIA labels and keyboard support
 
@@ -130,4 +144,4 @@ Free to use and modify for educational purposes.
 
 ## Credits
 
-Built with ❤️ for kids learning to count!
+Built with ❤️ for kids learning math!
